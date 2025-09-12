@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>ভুল তথ্য</title>
+  <style>
+    :root{
+      --bg-start: #fff0f0;
+      --bg-end: #ffdede;
+      --text: #9b0f0f;
+      --muted: #661010;
+      --accent: rgba(155,15,15,0.08);
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      font-family: "Noto Sans Bengali", sans-serif;
+      background: linear-gradient(180deg, var(--bg-start), var(--bg-end));
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--text);
+      overflow:hidden;
+    }
+    .card{
+      width:min(980px,94%);
+      padding:3rem 2rem;
+      border-radius:14px;
+      background: radial-gradient(circle at 10% 10%, var(--accent), transparent 30%),
+                  rgba(255,255,255,0.6);
+      box-shadow: 0 10px 30px rgba(107,16,16,0.12);
+      text-align:center;
+      backdrop-filter: blur(4px);
+    }
+    .icon{
+      font-size: clamp(40px, 8vw, 84px);
+      display:block;
+      margin-bottom:0.4rem;
+      animation:shake 1.6s infinite;
+    }
+    h1{
+      margin:0;
+      font-size: clamp(32px, 10vw, 96px);
+      line-height:1;
+      color: var(--text);
+      font-weight:800;
+      animation:pop 1.2s ease-in-out infinite alternate;
+    }
+    p{
+      margin-top:0.8rem;
+      color:var(--muted);
+      font-size: clamp(14px, 3vw, 20px);
+    }
+    .actions{ margin-top:1.4rem; }
+    .btn{
+      display:inline-block;
+      padding:0.6rem 1rem;
+      border-radius:10px;
+      background:#fff;
+      color:var(--text);
+      font-weight:700;
+      text-decoration:none;
+      box-shadow: 0 8px 20px rgba(107,16,16,0.08);
+    }
+    .particle{
+      position:fixed;
+      top:-6vh;
+      font-size:18px;
+      opacity:0.9;
+      pointer-events:none;
+      animation:fall linear forwards;
+    }
+    @keyframes fall{
+      0%{ transform:translateY(-10vh) rotate(0deg); opacity:0; }
+      10%{ opacity:1; }
+      100%{ transform:translateY(120vh) rotate(360deg); opacity:0.95; }
+    }
+    @keyframes pop{ from{ transform:scale(0.98); } to{ transform:scale(1.03); } }
+    @keyframes shake{
+      0%{ transform:translateX(0); }
+      20%{ transform:translateX(6px); }
+      40%{ transform:translateX(-6px); }
+      60%{ transform:translateX(4px); }
+      80%{ transform:translateX(-2px); }
+      100%{ transform:translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="card" role="alert">
+    <span class="icon">❌</span>
+    <h1>ভুল তথ্য</h1>
+    <p>এই তথ্যটি সঠিক নয় বা যাচাই করা হয়নি। অনুগ্রহ করে পুনরায় যাচাই করুন।</p>
+
+    <div class="actions">
+      <a class="btn" href="https://your-gift-click.github.io/Test-project/">পুনরায় যাচাই করুন</a>
+    </div>
+  </div>
+
+  <script>
+    const ICONS = ["❌","✖️","⚠️","•"];
+    function rand(min,max){ return Math.random()*(max-min)+min; }
+    function spawnParticle(){
+      const el=document.createElement('div');
+      el.className='particle';
+      el.textContent=ICONS[Math.floor(Math.random()*ICONS.length)];
+      el.style.fontSize=Math.floor(rand(12,28))+'px';
+      el.style.left=rand(2,96)+'vw';
+      const dur=rand(5,11);
+      el.style.animationDuration=dur+'s';
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(), dur*1000+1200);
+    }
+    setInterval(()=>{ for(let i=0;i<(Math.random()<0.6?1:2);i++){ setTimeout(spawnParticle,i*180); } },420);
+    setInterval(()=>{ for(let i=0;i<6;i++) setTimeout(spawnParticle,i*90); },7000);
+  </script>
+</body>
+  </html>
